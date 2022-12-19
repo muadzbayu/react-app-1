@@ -2,6 +2,9 @@
 // import Header from "./components/Header"
 import ProductList from "./components/ProductList";
 import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import About from "./components/About";
+import Contact from "./components/Contact";
 import './App.css';
 
 function App() {
@@ -11,8 +14,6 @@ function App() {
     { id: 3, title: 'Jacket', price: 1000000 }
   ])
 
-  const [name, setName] = useState('Fikri')
-
   const deleteProduct = (productId) => {
     const newProducts = products.filter(product => product.id !== productId)
     setProducts(newProducts)
@@ -20,13 +21,17 @@ function App() {
 
   useEffect(() => {
     console.log('Use Effect Running')
-  }, [name])
+  })
 
   return (
     <div>
-      <ProductList products={products} deleteProduct={deleteProduct} />
-      <button onClick={() => setName('John')}>Change Name</button>
-      <p>Name: {name}</p>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<ProductList products={products} deleteProduct={deleteProduct} />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
