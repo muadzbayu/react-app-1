@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import './App.css';
+import AddProduct from "./components/AddProduct";
+import EditProduct from "./components/EditProduct";
 
 function App() {
   const [products, setProducts] = useState([
@@ -27,8 +29,15 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
+          {/* Menu Product */}
           <Route exact path="/" element={<ProductList products={products} deleteProduct={deleteProduct} />}></Route>
+          <Route path="/add" element={<AddProduct />}></Route>
+          <Route path="/edit/:id" element={<EditProduct />}></Route>
+
+          {/* Menu About*/}
           <Route path="/about" element={<About />}></Route>
+
+          {/* Menu Contact */}
           <Route path="/contact" element={<Contact />}></Route>
         </Routes>
       </BrowserRouter>
